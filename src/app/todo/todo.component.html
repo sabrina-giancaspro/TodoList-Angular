@@ -1,0 +1,43 @@
+<div class="text-center bg container">
+  <h1 class="pb-3">To Do List</h1>
+  <div class="input-group todo-container mb-3">
+    <input [(ngModel)]="newTask" type="text" class="form-control" placeholder="Nuova attività">
+    <button class="btn btn-outline-primary" type="button" (click)="addTask()">
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
+
+  <div class="d-flex flex-column align-items-start">
+    <h3>Task Da Completare</h3>
+    <ul class="container">
+      <hr>
+      <li *ngFor="let task of incompleteTasks; let i = index"
+          class="d-flex justify-content-between align-items-center bord">
+        <span [class.completed]="task.completed">{{ task.title }}</span>
+        <div class="d-flex align-items-center">
+          <button class="btn rounded-circle me-2" [ngClass]="task.completed ? 'bg-success text-white' : 'btn-success'"
+                  (click)="toggleComplete(task)">
+            <i class="fas fa-check"></i>
+          </button>
+          <button class="btn rounded-circle me-2 btn-danger" (click)="removeTask(i)">
+            <i class="fa-solid fa-x"></i>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="d-flex flex-column align-items-start" *ngIf="completedTasks.length > 0">
+    <h3>Task Completate</h3>
+    <ul class="container">
+      <hr>
+      <li *ngFor="let task of completedTasks; let i = index"
+          class="d-flex justify-content-between align-items-center bord">
+        <span class="completed">{{ task.title }}</span>
+        <button class="btn rounded-circle me-2 btn-danger" (click)="removeTask(tasks.indexOf(task))">
+          <i class="fa-solid fa-x"></i>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
